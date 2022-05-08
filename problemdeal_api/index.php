@@ -25,14 +25,13 @@ $request_uri=str_replace($php_self,"",$request_uri);
 //$request_uri=str_replace("/","",$request_uri);
 
 //check api key
-verfiy_api_key();
+//verfiy_api_key();
 
 //call method
 $url = explode('/',$request_uri);
 
 $controller = $url[count($url)-2];
 $request = $url[count($url)-1];
-
 
 //init api
 require_once MODELS_DIR."/autoload.php";
