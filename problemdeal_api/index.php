@@ -1,7 +1,7 @@
 <?php
 
 //config dirs
-$upload_dir = __DIR__."/uploads";
+$upload_dir = __DIR__."/uploads/images";
 $models_dir = __DIR__."/model";
 $vendor_dir = __DIR__."/vendor";
 
@@ -34,6 +34,7 @@ $controller = $url[count($url)-2];
 $request = $url[count($url)-1];
 
 //init api
+require_once "config.php";
 require_once MODELS_DIR."/autoload.php";
 require_once __DIR__."/lib/Utility.php";
 require_once __DIR__."/db/dbconnecter.php";
@@ -52,14 +53,7 @@ if($controller=='admin'){
 
 }else if($controller=='api'){
     $api = new ApiController();
-
-    try {
-        $api->$request();
-    } catch (\Throwable $th) {
-        //throw $th;
-        no_method($request);
-    }
-
+    $api->init($request);
 
 }else{
     invalid_request();

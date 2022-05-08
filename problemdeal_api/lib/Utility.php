@@ -32,5 +32,19 @@ function decrypt_password($pass_hash){
 
 }
 
+function die_($conn){
+    // try {
+    //     mysqli_close($conn);
+    // } catch (\Throwable $th) {
+    //     //throw $th;
+    // }
+    die;
+}
+
+function send_email($data){
+
+    return true;
+
+}
 
 ?>

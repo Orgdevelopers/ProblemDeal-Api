@@ -1,9 +1,9 @@
 <?php
 
 $hostname = "localhost";
-$database   = "ravi_project";
-$db_user = 'root';
-$password = '';
+$database   = "prob_lemdeal";
+$db_user = 'prob_lemdeal';
+$password = 'prob_lemdeal';
 $portt = '3307';
 
 $base_url = "https://the-metasoft.tk/api/";
