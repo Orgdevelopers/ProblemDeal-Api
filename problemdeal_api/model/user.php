@@ -21,7 +21,7 @@ class User{
 
         if(isset($data['gmail'])){
             $gmail = $data['gmail'];
-            $stmt = mysqli_query($this->conn,"SELECT * FROM users WHERE email='$gmail' AND signin_type='2'");
+            $stmt = mysqli_query($this->conn,"SELECT * FROM users WHERE email='$gmail'");
 
         }else if(isset($data['id'])){
             $id = $data['id'];
@@ -64,11 +64,12 @@ class User{
         $email_check = mysqli_fetch_array(mysqli_query($this->conn, "SELECT * FROM users WHERE email='$email' "));
 
         if($email_check){
-            if($email_check['signin_type']=='2'){
-                $this->errorcode = '113';
-            }else{
-                $this->errorcode = '112';
-            }
+            // if($email_check['signin_type']=='2'){
+            //     $this->errorcode = '113';
+            // }else{
+            //     $this->errorcode = '112';
+            // }
+            $this->errorcode = '112';
             return false;
         }
 
@@ -140,6 +141,30 @@ class User{
     }
 
 
+    public function creategmail($data)
+    {
+        if(!$this->conn){
+            return false;
+        }
+
+        $email = $data['gmail'];
+        $username = $data['username'];
+        $name =$data['name'];
+        $password = encrypt_password($data['password']);
+
+        $date = gmdate("Y-m-d H:i:s");
+
+        $qry = "INSERT INTO users(id,name,username,email,password,pic,bio,verified,role,signin_type,updated,created)
+                    VALUES('0', '$name', '$username', '$email', '$password', '','','1','user','1', '$date', '$date')";
+
+        if($this->conn->query($qry)){
+            return true;
+
+        }else{
+            return false;
+
+        }
+    }
 
 
 

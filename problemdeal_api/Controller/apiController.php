@@ -17,7 +17,7 @@ class ApiController {
 
     }
 
-    public function emaillogin() //200 success, 201=wrong pass, 101=usernot
+    public function emaillogin() //200 success, 201=wrong pass, 101=usernot 113=gmail
     {
         $data = $this->getInputs();
         if($data!=null && isset($data['password']) && (isset($data['email']) || isset($data['user_name']))){
@@ -33,7 +33,13 @@ class ApiController {
                     $output['msg'] = "wrong password";
                 }
 
-            }else{
+            }
+            // else if($details['signin_type']=='2'){
+            //     $output['code'] = '113';
+            //     $output['msg'] = 'please log in via username';
+
+            // }
+            else{
                 $output['code'] = "101";
                 $output['msg'] = "user not found error:- ".$this->User->conn->error;
             }
@@ -107,6 +113,38 @@ class ApiController {
             incomplete_data($data);
         } 
 
+    }
+
+    public function creategmailuser() //101 connection error , 111=username ,112= email; , 113=gmail
+    {
+        $data = $this->getInputs();
+        if($data!=null && isset($data['username']) && isset($data['gmail'])){
+            $this->loadModel('User');
+
+            $check_params['username'] = $data['username'];
+            $check_params['email'] = $data['gmail'];
+            
+            if($this->User->checksignupdata($check_params)){
+                if($this->User->creategmail($data)){
+                    $output['code'] = '200';
+                    $output['msg'] = $this->User->getdetails($data);
+
+                }else{
+                    $output['code'] = "114";
+                    $output['msg'] = "error ".$this->User->conn->error;
+                }
+
+            }else{
+                $output['code'] = $this->User->errorcode;
+                $output['msg'] = "error";
+            }
+
+            echo json_encode($output);
+            die_($this->conn);
+
+        }else{
+            incomplete_data($data);
+        }
     }
 
     public function changeprofilepic()//200 =success, 201=sqlerrror; 101 = file error
@@ -316,7 +354,7 @@ class ApiController {
 
 
 
-    
+
 
     public function getInputs()
     {
