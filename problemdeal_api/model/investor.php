@@ -37,7 +37,6 @@ class investor{
             $qry = mysqli_query($this->conn, "SELECT * FROM investor ORDER BY id DESC LIMIT $sp,1000");
 
         }
-
         return mysqli_fetch_all($qry,1);
 
     }

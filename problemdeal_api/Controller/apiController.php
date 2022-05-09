@@ -197,6 +197,7 @@ class ApiController {
             $this->loadModel('Business');
             $this->loadModel('Idea');
             $this->loadModel('investor');
+            
 
              $details = $this->User->getdetails($data);
             if($details){

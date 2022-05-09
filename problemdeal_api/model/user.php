@@ -91,7 +91,7 @@ class User{
         $date = gmdate("Y-m-d H:i:s");
 
         $qry = "INSERT INTO users(id,name,username,email,password,pic,bio,verified,role,signin_type,updated,created)
-                    VALUES('0', '$name', '$username', '$email', '$password', '','','0','user','1', '$date', '$date')";
+                    VALUES('0', '$name', '$username', '$email', '$password', '','','1','user','1', '$date', '$date')";
 
         if($this->conn->query($qry)){
             return true;
