@@ -328,6 +328,7 @@ class ApiController {
         if($data==null){
             $data['sp'] = '0';
         }
+        
         if($data!=null){
             $this->loadModel('Investor');
 

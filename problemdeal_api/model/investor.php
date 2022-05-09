@@ -63,6 +63,7 @@ class investor{
         }
         return mysqli_fetch_all($qry,1);
 
+        
     }
 }
 
