@@ -270,13 +270,7 @@ class ApiController {
             $details = $this->Business->getall($data);
 
             if($details){
-
-                for($i=0;$i<count($details);$i++){
-                    $details[$i]['category_id'] = '0';
-                    $details[$i]['category_name'] = "None";
-                    
-                }
-
+                
                 $output['code'] = '200';
                 $output['msg'] = $details;
 
