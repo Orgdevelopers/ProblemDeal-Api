@@ -24,17 +24,41 @@ class Idea{
 
         if(isset($data['sp'])){
             $sp = $data['sp'];
-            $qry = mysqli_query($this->conn, "SELECT * FROM ideas ORDER BY id DESC LIMIT $sp,10 ;");
+            $qry = mysqli_query($this->conn, "SELECT ideas.*,
+            ideas.category AS category_id,
+            users.username,
+            category.name AS category_name,
+            category.icon AS category_icon
+            FROM
+            ideas, users, category
+            WHERE ideas.user_id = users.id
+            AND ideas.category = category.id ORDER BY id DESC LIMIT $sp,10 ;");
         }
 
         if(isset($data['all'])){
-            $qry = mysqli_query($this->conn, "SELECT * FROM ideas ORDER BY id DESC");
+            $qry = mysqli_query($this->conn, "SELECT ideas.*,
+            ideas.category AS category_id,
+            users.username,
+            category.name AS category_name,
+            category.icon AS category_icon
+            FROM
+            ideas, users, category
+            WHERE ideas.user_id = users.id
+            AND ideas.category = category.id ORDER BY id DESC");
 
         }
 
         if(isset($data['sp']) && isset($data['all'])){
             $sp = $data['sp'];
-            $qry = mysqli_query($this->conn, "SELECT * FROM ideas ORDER BY id DESC LIMIT $sp,1000");
+            $qry = mysqli_query($this->conn, "SELECT ideas.*,
+            ideas.category AS category_id,
+            users.username,
+            category.name AS category_name,
+            category.icon AS category_icon
+            FROM
+            ideas, users, category
+            WHERE ideas.user_id = users.id
+            AND ideas.category = category.id ORDER BY id DESC LIMIT $sp,1000");
 
         }
 
