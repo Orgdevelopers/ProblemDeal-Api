@@ -1,6 +1,6 @@
 <?php
 
-class Invester{
+class investor{
 
     public function countbyid($id)
     {
