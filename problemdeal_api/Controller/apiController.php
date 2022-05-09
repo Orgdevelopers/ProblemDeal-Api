@@ -194,25 +194,25 @@ class ApiController {
         $data = $this->getInputs();
         if($data!=null && isset($data['id'])){
             $this->loadModel('User');
-            // $this->loadModel('Business');
-            // $this->loadModel('Idea');
-            // $this->loadModel('Investor');
+            $this->loadModel('Business');
+            $this->loadModel('Idea');
+            $this->loadModel('Invester');
 
              $details = $this->User->getdetails($data);
-            // if($details){
-            //     $details['business'] = $this->Business->countbyid($details['id'])[0];
-            //     $details['ideas'] = $this->Idea->countbyid($details['id'])[0];
-            //     $details['investor'] = $this->Investor->countbyid($details['id'])[0];
+            if($details){
+                $details['business'] = $this->Business->countbyid($details['id'])[0];
+                $details['ideas'] = $this->Idea->countbyid($details['id'])[0];
+                $details['investor'] = $this->Investor->countbyid($details['id'])[0];
 
                 $output['code'] = '200';
                 $output['msg'] = $details;
 
                 
 
-            // }else{
-            //     $output['code'] = '201';
-            //     $output['msg'] = 'user not found :-'.$this->User->conn->error;
-            // }
+            }else{
+                $output['code'] = '201';
+                $output['msg'] = 'user not found :-'.$this->User->conn->error;
+            }
             
             echo json_encode($output);
             die_($this->conn);
