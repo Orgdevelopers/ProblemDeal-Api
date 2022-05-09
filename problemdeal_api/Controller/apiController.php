@@ -262,6 +262,7 @@ class ApiController {
         $data = $this->getInputs();
         if($data==null){
             $data['sp'] = '0';
+
         }
         if($data!=null){
             $this->loadModel('Business');
@@ -270,6 +271,8 @@ class ApiController {
 
             if($details){
             
+                $details['category_id'] = '0';
+                $details['category_name'] = "None";
                 $output['code'] = '200';
                 $output['msg'] = $details;
 
