@@ -61,7 +61,7 @@ class Business{
         FROM
         business, users, category
         WHERE business.user_id = users.id
-        AND business.category = category.id; ORDER BY id DESC LIMIT $sp,1000");
+        AND business.category = category.id ORDER BY id DESC LIMIT $sp,1000");
 
         }
 
