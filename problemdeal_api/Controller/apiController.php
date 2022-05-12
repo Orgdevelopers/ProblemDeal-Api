@@ -385,7 +385,6 @@ class ApiController {
         $data = $this->getInputs();
         if($data!=null && isset($data['id'])){
             $this->loadModel('Idea');
-
             $details = $this->Idea->getdetails($data);
 
             if($details){
