@@ -91,6 +91,7 @@ class Idea{
             }
 
         }else{
+            $this->error = "incomplete data";
             return false;
         }
 
