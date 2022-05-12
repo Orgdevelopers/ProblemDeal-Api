@@ -393,7 +393,8 @@ class ApiController {
 
             }else{
                 $output['code'] = '101';
-                $output['msg'] = 'error:-'.$this->Idea->conn->error;
+                $output['msg'] = 'error:-'.$this->Idea->error;
+                
             }
 
             echo json_encode($output);

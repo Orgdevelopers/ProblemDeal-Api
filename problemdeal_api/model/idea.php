@@ -83,7 +83,12 @@ class Idea{
 
             $details = mysqli_fetch_array($qry,1);
 
-            return $details;
+            if($details){
+                return $details;
+            }else{
+                $this->error = $this->conn->error;
+                return false;
+            }
 
         }else{
             return false;
