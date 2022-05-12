@@ -79,7 +79,7 @@ class Idea{
             FROM
             ideas, users, category
             WHERE ideas.user_id = users.id
-            AND ideas.category = category.id AND id='$id';");
+            AND ideas.category = category.id AND ideas.id='$id';");
 
             $details = mysqli_fetch_array($qry,1);
 
