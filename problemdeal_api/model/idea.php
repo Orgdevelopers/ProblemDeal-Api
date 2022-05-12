@@ -66,6 +66,32 @@ class Idea{
 
     }
 
+    public function getdetails($data)
+    {
+        if(!$this->conn && isset($data['id'])){
+
+            $id = $data['id'];
+            $qry = mysqli_query($this->conn, "SELECT ideas.*,
+            ideas.category AS category_id,
+            users.username,
+            category.name AS category_name,
+            category.icon AS category_icon
+            FROM
+            ideas, users, category
+            WHERE ideas.user_id = users.id
+            AND ideas.category = category.id AND id='$id';");
+
+            $details = mysqli_fetch_array($qry,1);
+
+            return $details;
+
+        }else{
+            return false;
+        }
+
+    }
+    
+
 }
 
 ?>

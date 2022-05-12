@@ -119,7 +119,7 @@ function invalid_request(){
 
 }
 
-function incomplete_data($error){
+function incomplete_data($error = ""){
     $output['code'] = '401';
     $output['msg'] = "incomplete data ";
 

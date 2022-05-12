@@ -32,7 +32,7 @@ function decrypt_password($pass_hash){
 
 }
 
-function die_($conn){
+function die_($conn = null){
     // try {
     //     mysqli_close($conn);
     // } catch (\Throwable $th) {

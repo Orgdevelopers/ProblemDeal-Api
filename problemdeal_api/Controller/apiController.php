@@ -341,7 +341,7 @@ class ApiController {
 
             }else{
                 $output['code'] = '101';
-                $output['msg'] = "server error :-".$this->Business->conn->error;
+                $output['msg'] = "server error :-".$this->Investor->conn->error;
 
             }
 
@@ -354,9 +354,57 @@ class ApiController {
 
     }
 
+    public function getbusinessdetails()
+    {
+        $data = $this->getInputs();
+        if($data!=null && isset($data['id'])){
+            $this->loadModel('Business');
 
+            $details = $this->Business->getdetails($data);
 
+            if($details){
+                $output['code'] = '200';
+                $output['msg'] = $details;
 
+            }else{
+                $output['code'] = '101';
+                $output['msg'] = 'error:-'.$this->Business->conn->error;
+            }
+
+            echo json_encode($output);
+            die_($this->conn);
+
+        }else{
+            incomplete_data();
+        }
+
+    }
+
+    public function getideadetails()
+    {
+        $data = $this->getInputs();
+        if($data!=null && isset($data['id'])){
+            $this->loadModel('Idea');
+
+            $details = $this->Idea->getdetails($data);
+
+            if($details){
+                $output['code'] = '200';
+                $output['msg'] = $details;
+
+            }else{
+                $output['code'] = '101';
+                $output['msg'] = 'error:-'.$this->Idea->conn->error;
+            }
+
+            echo json_encode($output);
+            die_($this->conn);
+
+        }else{
+            incomplete_data();
+        }
+
+    }
 
 
     public function getInputs()
