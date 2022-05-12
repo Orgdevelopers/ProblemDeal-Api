@@ -82,7 +82,7 @@ class Business{
             FROM
             business, users, category
             WHERE business.user_id = users.id
-            AND business.category = category.id AND id='$id';");
+            AND business.category = category.id AND business.id='$id';");
 
             $details = mysqli_fetch_array($qry,1);
 
