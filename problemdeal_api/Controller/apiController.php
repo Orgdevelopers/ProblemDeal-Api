@@ -359,6 +359,7 @@ class ApiController {
         $data = $this->getInputs();
         if($data!=null && isset($data['id'])){
             $this->loadModel('Business');
+            $this->loadModel('User');
 
             $details = $this->Business->getdetails($data);
 
@@ -368,7 +369,7 @@ class ApiController {
                 $user = $this->User->getdetails($user_update);
 
                 $out['User'] = $user;
-                $out['Idea'] = $details;
+                $out['Business'] = $details;
 
                 $output['code'] = '200';
                 $output['msg'] = $out;
