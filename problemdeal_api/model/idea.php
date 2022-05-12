@@ -68,7 +68,7 @@ class Idea{
 
     public function getdetails($data)
     {
-        if(!$this->conn && isset($data['id'])){
+        if($this->conn && isset($data['id'])){
 
             $id = $data['id'];
             $qry = mysqli_query($this->conn, "SELECT ideas.*,
