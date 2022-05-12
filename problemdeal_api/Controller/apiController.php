@@ -363,8 +363,15 @@ class ApiController {
             $details = $this->Business->getdetails($data);
 
             if($details){
+
+                $user_update['id'] = $details['user_id'];
+                $user = $this->User->getdetails($user_update);
+
+                $out['User'] = $user;
+                $out['Idea'] = $details;
+
                 $output['code'] = '200';
-                $output['msg'] = $details;
+                $output['msg'] = $out;
 
             }else{
                 $output['code'] = '101';
