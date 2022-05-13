@@ -274,9 +274,6 @@ class ApiController {
                 $output['code'] = '200';
                 $output['msg'] = $details;
 
-            }else if($details!=null && $details==[] && $this->Business->conn->error==''){
-                $output['code'] = '201';
-                $output['msg'] = 'no recordss';
             }
             else{
                 $output['code'] = '101';
@@ -293,6 +290,42 @@ class ApiController {
 
     }
 
+    public function getuserallbusiness()//200, 201=no rec 101=error
+    {
+        $data = $this->getInputs();
+        if(!isset($data['user_id'])){
+            incomplete_data();
+        }
+
+        if(!isset($data['sp'])){
+            $data['sp'] = '0';
+        }
+        
+        if($data!=null){
+            $this->loadModel('Business');
+
+            $details = $this->Business->getallbyuserid($data);
+
+            if($details){
+                
+                $output['code'] = '200';
+                $output['msg'] = $details;
+
+            }
+            else{
+                $output['code'] = '101';
+                $output['msg'] = "server error :-".$this->Business->conn->error;
+
+            }
+
+            echo json_encode($output);
+            die_($data);
+
+        }else{
+            incomplete_data($data);
+        }
+
+    }
 
     public function getallideas()//200, 101=error
     {
@@ -325,11 +358,82 @@ class ApiController {
 
     }
 
+    public function getuserallideas()//200, 101=error
+    {
+        $data = $this->getInputs();
+        if(!isset($data['user_id'])){
+            incomplete_data();
+        }
+
+        if(!isset($data['sp'])){
+            $data['sp'] = '0';
+        }
+        
+        if($data!=null){
+            $this->loadModel('Idea');
+
+            $details = $this->Idea->getallbyuserid($data);
+
+            if($details){
+            
+                $output['code'] = '200';
+                $output['msg'] = $details;
+
+            }else{
+                $output['code'] = '101';
+                $output['msg'] = "server error :-".$this->Business->conn->error;
+
+            }
+
+            echo json_encode($output);
+            die_($data);
+
+        }else{
+            incomplete_data($data);
+        }
+
+    }
 
     public function getallinvestor()//200, 101=error
     {
         $data = $this->getInputs();
         if($data==null){
+            $data['sp'] = '0';
+        }
+        
+        if($data!=null){
+            $this->loadModel('Investor');
+
+            $details = $this->Investor->getall($data);
+
+            if($details){
+            
+                $output['code'] = '200';
+                $output['msg'] = $details;
+
+            }else{
+                $output['code'] = '101';
+                $output['msg'] = "server error :-".$this->Investor->conn->error;
+
+            }
+
+            echo json_encode($output);
+            die_($data);
+
+        }else{
+            incomplete_data($data);
+        }
+
+    }
+
+    public function getuserallinvestor()//200, 101=error
+    {
+        $data = $this->getInputs();
+        if(!isset($data['user_id'])){
+            incomplete_data();
+        }
+
+        if(!isset($data['sp'])){
             $data['sp'] = '0';
         }
         
