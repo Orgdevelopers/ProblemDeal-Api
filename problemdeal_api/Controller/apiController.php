@@ -257,7 +257,7 @@ class ApiController {
     }
 
 
-    public function getallbusiness()//200, 101=error
+    public function getallbusiness()//200, 201=no rec 101=error
     {
         $data = $this->getInputs();
         if($data==null){
@@ -274,7 +274,11 @@ class ApiController {
                 $output['code'] = '200';
                 $output['msg'] = $details;
 
-            }else{
+            }else if($details!=null && $details==[] && $this->Business->conn->error==''){
+                $output['code'] = '201';
+                $output['msg'] = 'no recordss';
+            }
+            else{
                 $output['code'] = '101';
                 $output['msg'] = "server error :-".$this->Business->conn->error;
 
