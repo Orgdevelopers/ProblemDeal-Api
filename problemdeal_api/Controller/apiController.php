@@ -201,9 +201,9 @@ class ApiController {
 
              $details = $this->User->getdetails($data);
             if($details){
-                $details['business'] = $this->Business->countbyid($details['id'])[0];
-                $details['ideas'] = $this->Idea->countbyid($details['id'])[0];
-                $details['investor'] = $this->investor->countbyid($details['id'])[0];
+                // $details['business'] = $this->Business->countbyid($details['id'])[0];
+                // $details['ideas'] = $this->Idea->countbyid($details['id'])[0];
+                // $details['investor'] = $this->investor->countbyid($details['id'])[0];
 
                 $output['code'] = '200';
                 $output['msg'] = $details;

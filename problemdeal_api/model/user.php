@@ -21,19 +21,31 @@ class User{
 
         if(isset($data['gmail'])){
             $gmail = $data['gmail'];
-            $stmt = mysqli_query($this->conn,"SELECT * FROM users WHERE email='$gmail'");
+            $stmt = mysqli_query($this->conn,"SELECT  *, (SELECT COUNT(*) FROM business WHERE business.user_id = users.id) AS 'business',
+            (SELECT COUNT(*) FROM ideas WHERE ideas.user_id = users.id) AS 'ideas',
+            (SELECT COUNT(*) FROM investor WHERE investor.user_id = users.id) AS 'investor'
+            FROM users WHERE users.email='$gmail'");
 
         }else if(isset($data['id'])){
             $id = $data['id'];
-            $stmt = mysqli_query($this->conn,"SELECT * FROM users WHERE id='$id'");
+            $stmt = mysqli_query($this->conn,"SELECT  *, (SELECT COUNT(*) FROM business WHERE business.user_id = users.id) AS 'business',
+            (SELECT COUNT(*) FROM ideas WHERE ideas.user_id = users.id) AS 'ideas',
+            (SELECT COUNT(*) FROM investor WHERE investor.user_id = users.id) AS 'investor'
+            FROM users WHERE users.id ='$id'");
 
         }else if(isset($data['email'])){
             $email = $data['email'];
-            $stmt = mysqli_query($this->conn,"SELECT * FROM users WHERE email='$email'");
+            $stmt = mysqli_query($this->conn,"SELECT  *, (SELECT COUNT(*) FROM business WHERE business.user_id = users.id) AS 'business',
+            (SELECT COUNT(*) FROM ideas WHERE ideas.user_id = users.id) AS 'ideas',
+            (SELECT COUNT(*) FROM investor WHERE investor.user_id = users.id) AS 'investor'
+            FROM users WHERE users.email='$email'");
 
         }else if(isset($data['username'])){
             $username = $data['username'];
-            $stmt = mysqli_query($this->conn,"SELECT * FROM users WHERE username='$username'");
+            $stmt = mysqli_query($this->conn,"SELECT  *, (SELECT COUNT(*) FROM business WHERE business.user_id = users.id) AS 'business',
+            (SELECT COUNT(*) FROM ideas WHERE ideas.user_id = users.id) AS 'ideas',
+            (SELECT COUNT(*) FROM investor WHERE investor.user_id = users.id) AS 'investor'
+            FROM users WHERE users.username='$username'");
 
         }else{
             return false;
