@@ -532,6 +532,27 @@ class ApiController {
     }
 
 
+    public function getallcategories()
+    {
+        $this->loadModel('Category');
+
+        $categories = $this->Category->getAll();
+
+        if(count($categories)>0){
+            $output['code'] = '200';
+            $output['msg'] = $categories;
+
+        }else{
+            $output['code'] = '101';
+            $output['msg'] = 'error :-'.$this->Category->conn->error;
+        }
+
+        echo json_encode($output);
+        die;
+
+    }
+
+
     public function getInputs()
     {
         $php_input = json_decode(file_get_contents("php://input"),true);
