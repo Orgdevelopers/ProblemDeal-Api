@@ -556,7 +556,7 @@ class ApiController {
     {
         $data = $this->getInputs();
         if($data==null){
-            echo json_encode(['code'=>101,'message'=>'incomplete params']);
+            echo json_encode(['code'=>'101','message'=>'incomplete params']);
             die;
         }
         
@@ -584,14 +584,14 @@ class ApiController {
             $create_data['created'] = $date;
 
             if($this->Business->create($create_data)){
-                echo json_encode(['code'=>101,'message'=>'{"success":"true","id":"'.$this->Business->InsertId.'"}']);
+                echo json_encode(['code'=>'101','message'=>'{"success":"true","id":"'.$this->Business->InsertId.'"}']);
 
             }else{
-                echo json_encode(['code'=>101,'message'=>'error'.$this->Business->conn->error]);
+                echo json_encode(['code'=>'101','message'=>'error'.$this->Business->conn->error]);
             }
 
         }else{
-        	echo json_encode(['code'=>101,'message'=>'error moving file']);
+        	echo json_encode(['code'=>'101','message'=>'error moving file']);
 
         }
 
