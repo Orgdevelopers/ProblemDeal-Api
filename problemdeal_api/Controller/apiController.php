@@ -585,7 +585,7 @@ class ApiController {
             $create_data['created'] = $date;
 
             if($this->Business->create($create_data)){
-                echo json_encode(['code'=>'101','message'=>'{"success":"true","id":"'.$this->Business->InsertId.'"}']);
+                echo json_encode(['code'=>'200','message'=>'{"success":"true","id":"'.$this->Business->InsertId.'"}']);
 
             }else{
                 echo json_encode(['code'=>'101','message'=>'error'.$this->Business->conn->error]);

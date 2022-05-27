@@ -174,6 +174,7 @@ class Business{
 
         if($this->conn->query($qry)){
             $this->InsertId = $this->conn->insert_id;
+            return true;
         }else{
             return false;
         }

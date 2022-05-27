@@ -1,7 +1,7 @@
 <?php
 
 //config dirs
-$upload_dir = __DIR__."/uploads/images";
+$upload_dir = __DIR__."/uploads/images/";
 $models_dir = __DIR__."/model";
 $vendor_dir = __DIR__."/vendor";
 
