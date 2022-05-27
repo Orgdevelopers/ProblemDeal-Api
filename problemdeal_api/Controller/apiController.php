@@ -555,7 +555,7 @@ class ApiController {
     public function uploadbusiness()
     {
         $data = $this->getInputs();
-        if($data==null || !isset($data['id'])){
+        if($data==null){
             echo json_encode(['code'=>101,'message'=>'incomplete params']);
             die;
         }
