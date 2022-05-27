@@ -276,8 +276,14 @@ class ApiController {
 
             }
             else{
-                $output['code'] = '101';
-                $output['msg'] = "server error :-".$this->Business->conn->error;
+                if(is_array($details) && $this->Business->conn->error==null){
+                    $output['code'] = '201';
+                    $output['msg'] = "no records";
+                }else{
+                    $output['code'] = '101';
+                    $output['msg'] = "server error :-".$this->Business->conn->error;
+                }
+               
 
             }
 
