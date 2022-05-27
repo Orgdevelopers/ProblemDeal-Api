@@ -604,9 +604,7 @@ class ApiController {
         $php_input = json_decode(file_get_contents("php://input"),true);
         $data = $_POST;
         if($php_input!=null && $data!=null){
-            for($i=0;$i<count($php_input);$i++){
-                $data[] = $php_input[$i];
-            }
+            $data = array_merge($data,$php_input);
             return $data;
         }else if($php_input!=null && $data==null){
             return $php_input;
