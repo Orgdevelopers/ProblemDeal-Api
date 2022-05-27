@@ -552,6 +552,52 @@ class ApiController {
 
     }
 
+    public function uploadbusiness()
+    {
+        $data = $this->getInputs();
+        if($data==null || !isset($data['id'])){
+            echo json_encode(['code'=>101,'message'=>'incomplete params']);
+            die;
+        }
+        
+        $this->loadModel('Business');
+
+        $prefix=rand(1000,999999);
+
+        $originalImgName= $prefix.$_FILES['u_file']['name'];
+        $tempName= $_FILES['u_file']['tmp_name'];
+        $folder= UPLOADS_DIR;
+        
+        if(move_uploaded_file($tempName,$folder.$originalImgName)){
+
+            $date = gmdate("Y-m-d H:i:s");
+
+            $create_data['user_id'] = $data['id'];
+            $create_data['name'] = $data['business_name'];
+            $create_data['category'] = $data['category'];
+            $create_data['icon'] = "uploads/images/".$originalImgName;
+            $create_data['description'] = $data['description'];
+            $create_data['equity'] = $data['equity'];
+            $create_data['status'] = '1';
+            $create_data['extra'] = 'n';
+            $create_data['updated'] = $date;
+            $create_data['created'] = $date;
+
+            if($this->Business->create($create_data)){
+                echo json_encode(['code'=>101,'message'=>'{"success":"true","id":"'.$this->Business->InsertId.'"}']);
+
+            }else{
+                echo json_encode(['code'=>101,'message'=>'error'.$this->Business->conn->error]);
+            }
+
+        }else{
+        	echo json_encode(['code'=>101,'message'=>'error moving file']);
+
+        }
+
+        
+
+    }
 
     public function getInputs()
     {
