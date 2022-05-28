@@ -595,6 +595,8 @@ class ApiController {
 
             }else{
                 echo json_encode(['code'=>'101','message'=>'error'.$this->Business->conn->error]);
+                unlink($folder.$originalImgName);
+
             }
 
         }else{
@@ -602,7 +604,7 @@ class ApiController {
 
         }
 
-        
+        die;
 
     }
 
