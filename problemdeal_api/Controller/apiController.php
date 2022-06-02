@@ -386,8 +386,13 @@ class ApiController {
                 $output['msg'] = $details;
 
             }else{
-                $output['code'] = '101';
-                $output['msg'] = "server error :-".$this->Business->conn->error;
+                if($details==[] && $this->Idea->conn->error==null){
+                    $output['code'] = '201';
+                    $output['msg'] = "no records";
+                }else{
+                    $output['code'] = '101';
+                    $output['msg'] = "server error :-".$this->Idea->conn->error;
+                }
 
             }
 
@@ -595,6 +600,56 @@ class ApiController {
 
             }else{
                 echo json_encode(['code'=>'101','message'=>'error'.$this->Business->conn->error]);
+                unlink($folder.$originalImgName);
+
+            }
+
+        }else{
+        	echo json_encode(['code'=>'101','message'=>'error moving file']);
+
+        }
+
+        die;
+
+    }
+
+    public function uploadidea()
+    {
+        
+        $data = $this->getInputs();
+        if($data==null){
+            echo json_encode(array('code'=>'101','message'=>'incomplete params'));
+            die;
+        }
+        
+        $this->loadModel('Idea');
+
+        $prefix=rand(1000,999999);
+
+        $originalImgName= $prefix.$_FILES['u_file']['name'];
+        $tempName= $_FILES['u_file']['tmp_name'];
+        $folder= UPLOADS_DIR;
+        
+        if(move_uploaded_file($tempName,$folder.$originalImgName)){
+
+            $date = gmdate("Y-m-d H:i:s");
+
+            $create_data['user_id'] = $data['id'];
+            $create_data['name'] = $data['idea_name'];
+            $create_data['category'] = $data['category'];
+            $create_data['icon'] = "uploads/images/".$originalImgName;
+            $create_data['description'] = $data['description'];
+            $create_data['equity'] = $data['equity'];
+            $create_data['status'] = '1';
+            $create_data['extra'] = 'n';
+            $create_data['updated'] = $date;
+            $create_data['created'] = $date;
+
+            if($this->Idea->create($create_data)){
+                echo json_encode(['code'=>'200','message'=>'{"success":"true","id":"'.$this->Idea->InsertId.'"}']);
+
+            }else{
+                echo json_encode(['code'=>'101','message'=>'error'.$this->Idea->conn->error]);
                 unlink($folder.$originalImgName);
 
             }

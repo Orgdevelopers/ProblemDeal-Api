@@ -151,6 +151,36 @@ class Idea{
         }
 
     }
+
+    public function create($create_data)
+    {
+        if(!$this->conn){
+            return false;
+        }
+
+        $user_id = $create_data['user_id'];
+        $name = $create_data['name'];
+        $cat = $create_data['category'];
+        $icon = $create_data['icon'];
+        $desc = " ".$create_data['description'];
+        $equity = $create_data['equity'];
+        $status = $create_data['status']; 
+        $extra = $create_data['extra'];  
+        $updated = $create_data['updated'];   
+        $created = $create_data['created'];  
+
+        $qry = "INSERT INTO 
+        `ideas`(`id`, `user_id`, `name`, `category`, `icon`, `description`, `equity`, `status`, `extra`, `updated`, `created`)
+         VALUES ('0','$user_id','$name','$cat','$icon', '$desc','$equity','$status','$extra','$updated','$created')";
+
+        if($this->conn->query($qry)){
+            $this->InsertId = $this->conn->insert_id;
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
     
 
 }
