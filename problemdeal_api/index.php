@@ -124,7 +124,7 @@ function incomplete_data($error = ""){
     $output['msg'] = "incomplete data ";
 
     if($error!=null){
-        $output .= ":- ".$error;
+        $output['msg'] .= ":- ".$error;
     }
 
     echo json_encode($output);

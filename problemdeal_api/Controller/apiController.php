@@ -351,7 +351,7 @@ class ApiController {
 
             }else{
                 $output['code'] = '101';
-                $output['msg'] = "server error :-".$this->Business->conn->error;
+                $output['msg'] = "server error :-".$this->Idea->conn->error;
 
             }
 
