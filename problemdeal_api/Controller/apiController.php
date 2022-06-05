@@ -228,32 +228,64 @@ class ApiController {
     public function updateuser() //200 succ, 201 error
     {
         $data = $this->getInputs();
-        if($data!=null && isset($data['id'])){
-            $this->loadModel('User');
-            $this->loadModel('Business');
-            $this->loadModel('Idea');
-            $this->loadModel('Investor');
+        $this->loadModel('User');
+        if($_FILES!=null){
 
-            if($this->User->update($data)){
-                $details = $this->User->getdetails($data);
-                $details['business'] = $this->Business->countbyid($details['id'])[0];
-                $details['ideas'] = $this->Idea->countbyid($details['id'])[0];
-                $details['investor'] = $this->Investor->countbyid($details['id'])[0];
+            if($data!=null && isset($data['id'])){
+                $prefix=rand(1000,999999);
 
-                $output['code'] = '200';
-                $output['msg'] = $details;
+                $originalImgName= $prefix.$_FILES['u_file']['name'];
+                $tempName= $_FILES['u_file']['tmp_name'];
+                $folder= UPLOADS_DIR;
+                
+                if(move_uploaded_file($tempName,$folder.$originalImgName)){
+
+                    $path = "uploads/images/".$originalImgName;
+                    $data['pic'] = $path;
+
+                    if($this->User->update($data)){
+                        $details = $this->User->getdetails($data);
+                        $output['code'] = '200';
+                        $output['msg'] = $details;
+    
+                    }else{
+                        $output['code'] = '201';
+                        $output['msg'] = 'user not found :-'.$this->User->conn->error;
+                    }
+
+                }else{
+                    $output['code'] = '101';
+                    $output['msg'] = 'failed to move files';
+                }
+
+                echo json_encode($output);
 
             }else{
-                $output['code'] = '201';
-                $output['msg'] = 'user not found :-'.$this->User->conn->error;
+                incomplete_data($data);
             }
-            
-            echo json_encode($output);
-            die_($this->conn);
 
         }else{
-            incomplete_data($data);
+            if($data!=null && isset($data['id'])){
+
+                if($this->User->update($data)){
+                    $details = $this->User->getdetails($data);
+                    $output['code'] = '200';
+                    $output['msg'] = $details;
+
+                }else{
+                    $output['code'] = '201';
+                    $output['msg'] = 'user not found :-'.$this->User->conn->error;
+                }
+                
+                echo json_encode($output);
+                die_($this->conn);
+
+            }else{
+                incomplete_data($data);
+            }
+
         }
+
     }
 
 
