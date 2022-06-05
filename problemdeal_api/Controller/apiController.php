@@ -20,7 +20,7 @@ class ApiController {
     public function emaillogin() //200 success, 201=wrong pass, 101=usernot 113=gmail
     {
         $data = $this->getInputs();
-        if($data!=null && isset($data['password']) && (isset($data['email']) || isset($data['user_name']))){
+        if($data!=null && isset($data['password']) && (isset($data['email']) || isset($data['username']))){
             $this->loadModel('User');
             $details = $this->User->getdetails($data);
             if($details){
