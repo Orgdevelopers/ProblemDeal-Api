@@ -246,19 +246,20 @@ class ApiController {
                     if($this->User->update($data)){
                         $details = $this->User->getdetails($data);
                         $output['code'] = 200;
-                        $output['msg'] = $details;
+                        $output['message'] = $details;
     
                     }else{
                         $output['code'] = 201;
-                        $output['msg'] = 'user not found :-'.$this->User->conn->error;
+                        $output['message'] = 'user not found :-'.$this->User->conn->error;
                     }
 
                 }else{
                     $output['code'] = 101;
-                    $output['msg'] = 'failed to move files';
+                    $output['message'] = 'failed to move files';
                 }
 
                 echo json_encode($output);
+                die;
 
             }else{
                 incomplete_data($data);
