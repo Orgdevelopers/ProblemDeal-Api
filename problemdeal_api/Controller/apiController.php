@@ -246,7 +246,7 @@ class ApiController {
                     if($this->User->update($data)){
                         $details = $this->User->getdetails($data);
                         $output['code'] = 200;
-                        $output['message'] = $details;
+                        $output['message'] = json_encode($details);
     
                     }else{
                         $output['code'] = 201;
