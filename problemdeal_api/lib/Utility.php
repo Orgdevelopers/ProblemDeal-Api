@@ -64,7 +64,7 @@ function send_email($data){
     $headers .= "MIME-Version: 1.0 \n";
     $headers .= "Content-Type: text/html; charset=iso-8859-1 \n";
 
-    if(mail($to,$sub,$msg,$headers)){
+    if(mail($to,$sub,$msg)){
         return true;
         
     }else{
