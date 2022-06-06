@@ -594,6 +594,9 @@ class ApiController {
                 $business = $this->Business->getallbyuserid($get);
                 $ideas = $this->Idea->getallbyuserid($get);
 
+                $id['id'] = $details['user_id'];
+                $user = $this->User->getdetails($id);
+
                 if(!count($business)>0){
                     $business=[];
                 }
@@ -606,6 +609,7 @@ class ApiController {
                 $output['msg'] = $details;
                 $output['business'] = $business;
                 $output['idea'] = $ideas;
+                $output['user'] = $user;
 
             }else{
                 $output['code'] = '101';

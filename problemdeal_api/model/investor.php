@@ -135,7 +135,7 @@ class investor{
         category.icon AS category_icon
         FROM
         investor, users, category
-        AND investor.user_id = users.id
+        WHERE investor.user_id = users.id
         AND investor.category = category.id
         AND investor.id = '$id' ;");
 
