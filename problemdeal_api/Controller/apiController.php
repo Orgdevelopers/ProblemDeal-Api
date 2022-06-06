@@ -746,6 +746,56 @@ class ApiController {
 
     }
 
+    public function uploadinvestor()
+    {
+        
+        $data = $this->getInputs();
+        if($data==null){
+            echo json_encode(array('code'=>'101','message'=>'incomplete params'));
+            die;
+        }
+        
+        $this->loadModel('investor');
+
+        $prefix=rand(1000,999999);
+
+        $originalImgName= $prefix.$_FILES['u_file']['name'];
+        $tempName= $_FILES['u_file']['tmp_name'];
+        $folder= UPLOADS_DIR;
+        
+        if(move_uploaded_file($tempName,$folder.$originalImgName)){
+
+            $date = gmdate("Y-m-d H:i:s");
+
+            $create_data['user_id'] = $data['id'];
+            $create_data['name'] = $data['name'];
+            $create_data['category'] = $data['category'];
+            $create_data['icon'] = "uploads/images/".$originalImgName;
+            $create_data['description'] = $data['description'];
+            $create_data['equity'] = '0';
+            $create_data['status'] = '1';
+            $create_data['extra'] = 'n';
+            $create_data['updated'] = $date;
+            $create_data['created'] = $date;
+
+            if($this->investor->create($create_data)){
+                echo json_encode(['code'=>'200','message'=>'{"success":"true","id":"muje ni pta yar"}']);
+
+            }else{
+                echo json_encode(['code'=>'101','message'=>'error'.$this->investor->conn->error]);
+                unlink($folder.$originalImgName);
+
+            }
+
+        }else{
+        	echo json_encode(['code'=>'101','message'=>'error moving file']);
+
+        }
+
+        die;
+
+    }
+
     public function resendverificationemail() //200=success, 101=error , 201 = already verified , 111 faild to send email
     {
         $data = $this->getInputs();

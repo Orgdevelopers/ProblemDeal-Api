@@ -2,6 +2,34 @@
 
 class investor{
 
+    public function create($data)
+    {
+        if(!$this->conn){
+            return false;
+        }
+
+        $user_id = $data['user_id'];
+        $name = $data['name'];
+        $cat = $data['category'];
+        $icon = $data['icon'];
+        $description = $data['description'];
+        $equity = $data['equity'];
+        $status = $data['status'];
+        $extra = $data['extra'];
+        $updated = $data['updated'];
+        $created = $data['created'];
+
+        $qry = "INSERT INTO `investor` (`id`, `user_id`, `name`, `category`, `icon`, `description`, `equity`, `status`, `extra`, `updated`, `created`)
+                                VALUES ('0', '$user_id', '$name', '$cat', '$icon', '$description', '$equity', '$status', '$extra', '$updated', '$created');";
+
+        if($this->conn->query($qry)){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
     public function countbyid($id)
     {
         if(!$this->conn){
@@ -139,7 +167,7 @@ class investor{
         AND investor.category = category.id
         AND investor.id = '$id' ;");
 
-        $details = mysqli_fetch_array($qry);
+        $details = mysqli_fetch_array($qry,1);
 
         if($details){
             return $details;
