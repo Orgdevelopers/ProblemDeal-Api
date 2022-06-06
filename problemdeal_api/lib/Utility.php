@@ -43,7 +43,33 @@ function die_($conn = null){
 
 function send_email($data){
 
-    return true;
+    if($data==null){
+        return false;
+    }
+
+    $to = $data['to'];
+    $sub = $data['sub'];
+    $msg = $data['msg'];
+
+    $mail_name = MAIL_NAME;
+    $mail_from = MAIL_EMAIL;
+    $mail_reply = MAIL_REPLYTO;
+
+    $headers  = "From: ".$mail_name." <".$mail_from."> \r\n";
+    //$headers .= "Cc: testsite <mail@testsite.com>\n"; 
+    $headers .= "X-Sender: ".$mail_name." <".$mail_from."> \r\n";
+    $headers .= 'X-Mailer: PHP/' . phpversion()."\r\n";
+    $headers .= "X-Priority: 1 \r\n"; // Urgent message!
+    $headers .= "Return-Path: ".$mail_reply." \r\n"; // Return path for errors
+    $headers .= "MIME-Version: 1.0 \n";
+    $headers .= "Content-Type: text/html; charset=iso-8859-1 \n";
+
+    if(mail($to,$sub,$msg,$headers)){
+        return true;
+        
+    }else{
+        return false;
+    }
 
 }
 

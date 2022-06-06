@@ -66,11 +66,11 @@ class ApiController {
                     $output['code'] = '200';
                     $output['msg'] = $this->User->getdetails($user);
 
-                    $email['to'] = $data['email'];
-                    $email['subject'] = "Verify your account";
-                    $email['msg'] = "hi ".$data['name'].", \nPlease visit this link to verify your account ".BASE_URL."verify/signup.php?token=".encrypt_password($data['email']);
-
-                    if(send_email($email)){
+                    $mail['to'] = $data['email'];
+                    $mail['sub'] = "Verify your account";
+                    $mail['msg'] = "Hi ".$data['username'].", \nWelcome to".APP_NAME." you have recently signind in Please verify your email here \n". BASE_URL.'verify/signup.php?token='.encrypt_password($data['msg']['id']);
+                    
+                    if(send_email($mail)){
                         $output['v_email'] = "200";
                     }else{
                         $output['v_email'] = "101";
@@ -694,6 +694,90 @@ class ApiController {
 
         die;
 
+    }
+
+    public function resendverificationemail() //200=success, 101=error , 201 = already verified , 111 faild to send email
+    {
+        $data = $this->getInputs();
+        if($data!=null && isset($data['id'])){
+            $this->loadModel('User');
+
+            $details = $this->User->getdetails($data);
+
+            if($details){
+                
+                if($details['verified']==0){
+
+                    $mail['to'] = $details['email'];
+                    $mail['sub'] = "Verify your account";
+                    $mail['msg'] = "Hi ".$details['username'].", \nWelcome to".APP_NAME." you have recently signind in Please verify your email here \n". BASE_URL.'verify/signup.php?token='.encrypt_password($details['id']);
+
+                    if(send_email($mail)){
+                        $output['code'] = '200';
+                        $output['msg'] = 'success';
+
+                    }else{
+                        $output['code'] = '111';
+                        $output['msg'] = 'failed to send email please try again later';
+                    }
+
+                }else{
+                    $output['code'] = '201';
+                    $output['msg'] = 'already verifies '.$details['verified'];
+
+                }
+
+
+            }else{
+                $output['code'] = '101';
+                $output['msg'] = 'user not found :-'.$this->User->conn->error;
+            }
+            
+            echo json_encode($output);
+            die_($this->conn);
+
+        }else{
+            incomplete_data($data);
+        }
+
+    }
+
+    public function verifyuser()
+    {
+        $data = $this->getInputs();
+        if(isset($data['id'])){
+            $this->loadModel('User');
+
+            $details = $this->User->getdetails($data);
+
+            if($details){
+                if($details['verified']=='0'){
+                    $update['id'] = $data['id'];
+                    $update['verified'] = '1';
+
+                    if($this->User->update($update)){
+                        $out['code'] = '200';
+                        $out['msg'] =  'success';
+
+                    }else{
+                        $out['code'] = '211';
+                        $out['msg'] =  'update failed';
+                    }
+
+                }else{
+                    $out['code'] = '201';
+                    $out['msg'] =  'verification status '.$details['verification'];
+                }
+
+            }else{
+                $out['code'] = '101';
+                $out['msg'] =  'user not found';
+            }
+
+            
+        }else{
+            incomplete_data();
+        }
     }
 
     public function getInputs()

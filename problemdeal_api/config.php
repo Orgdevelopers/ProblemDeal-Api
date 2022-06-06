@@ -6,10 +6,15 @@ $db_user = 'prob_lemdeal';
 $password = 'prob_lemdeal';
 $portt = '3307';
 
-$base_url = "https://the-metasoft.tk/api/";
+$base_url = "https://problemdeal.tk/problemdeal_api/";
 $api_key = 'AAADFJ-J9D49F-NDN49H-NVOI49=';
 
+$mail_name = 'Problem deal verification service';
+$mail_email = 'support@problemdeal.tk';
+$mail_reply_to = 'no-reply@problemdeal.tk';
 
+define('APP_NAME','Problem deal');
+define('API_KEY',$api_key);
 define('DB_HOST',$hostname);
 define('DB_DATABASE',$database);
 define('DB_USERNAME',$db_user);
@@ -17,6 +22,9 @@ define('DB_PASSWORD',$password);
 define('DB_PORT',$portt);
 define('BASE_URL',$base_url);
 
+define('MAIL_NAME',$mail_name);
+define('MAIL_EMAIL',$mail_email);
+define('MAIL_REPLYTO',$mail_reply_to);
 
 
 // function http_request(){
