@@ -142,7 +142,7 @@ class investor{
         $details = mysqli_fetch_array($qry);
 
         if($details){
-            return true;
+            return $details;
         }else{
             return false;
         }
