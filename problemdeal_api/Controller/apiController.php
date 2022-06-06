@@ -438,6 +438,47 @@ class ApiController {
 
     }
 
+    public function getuserallprivateideas()//200, 101=error
+    {
+        $data = $this->getInputs();
+        if(!isset($data['user_id'])){
+            incomplete_data();
+        }
+
+        if(!isset($data['sp'])){
+            $data['sp'] = '0';
+        }
+        
+        if($data!=null){
+            $this->loadModel('Idea');
+
+            $details = $this->Idea->getuserprivate($data);
+
+            if($details){
+            
+                $output['code'] = '200';
+                $output['msg'] = $details;
+
+            }else{
+                if($details==[] && $this->Idea->conn->error==null){
+                    $output['code'] = '201';
+                    $output['msg'] = "no records";
+                }else{
+                    $output['code'] = '101';
+                    $output['msg'] = "server error :-".$this->Idea->conn->error;
+                }
+
+            }
+
+            echo json_encode($output);
+            die_($data);
+
+        }else{
+            incomplete_data($data);
+        }
+
+    }
+
     public function getallinvestor()//200, 101=error
     {
         $data = $this->getInputs();
