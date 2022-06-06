@@ -575,6 +575,52 @@ class ApiController {
 
     }
 
+    public function getinvestordetails()
+    {
+        $data = $this->getInputs();
+        if($data!=null && isset($data['id'])){
+            $this->loadModel('investor');
+            $this->loadModel('User');
+            $this->loadModel('Business');
+            $this->loadModel('Idea');
+
+            $details = $this->investor->getdetails($data);
+
+            if($details){
+                
+                $get['sp'] = 0;
+                $get['user_id'] = $details['user_id'];
+
+                $business = $this->Business->getallbyuserid($get);
+                $ideas = $this->Idea->getallbyuserid($get);
+
+                if(!count($business)>0){
+                    $business=[];
+                }
+
+                if(!count($ideas)>0){
+                    $ideas = [];
+                }
+
+                $output['code'] = 200;
+                $output['msg'] = $details;
+                $output['business'] = $business;
+                $output['idea'] = $ideas;
+
+            }else{
+                $output['code'] = '101';
+                $output['msg'] = 'error:-'.$this->Idea->error;
+
+            }
+
+            echo json_encode($output);
+            die_($this->conn);
+
+        }else{
+            incomplete_data();
+        }
+
+    }
 
     public function getallcategories()
     {

@@ -121,6 +121,34 @@ class investor{
         
     }
 
+    public function getdetails($data){
+        if(!$this->conn){
+            return false;
+        }
+
+        $id = $data['id'];
+
+        $qry = mysqli_query($this->conn,"SELECT investor.*,
+        investor.category AS category_id,
+        users.username,
+        category.name AS category_name,
+        category.icon AS category_icon
+        FROM
+        investor, users, category
+        AND investor.user_id = users.id
+        AND investor.category = category.id
+        AND investor.id = '$id' ;");
+
+        $details = mysqli_fetch_array($qry);
+
+        if($details){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
 }
 
 ?>
