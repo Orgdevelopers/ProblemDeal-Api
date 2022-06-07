@@ -146,6 +146,7 @@ class Idea{
             ideas, users, category
             WHERE ideas.user_id = '$id'
             AND ideas.user_id = users.id
+            AND ideas.status = '0'
             AND ideas.category = category.id ORDER BY id DESC LIMIT $sp,10 ;");
         }
 
@@ -158,6 +159,7 @@ class Idea{
             FROM
             ideas, users, category
             WHERE ideas.user_id = '$id'
+            AND ideas.status = '0'
             AND ideas.user_id = users.id
             AND ideas.category = category.id ORDER BY id DESC");
 
@@ -174,6 +176,7 @@ class Idea{
             ideas, users, category
             WHERE ideas.user_id = '$id'
             AND ideas.user_id = users.id
+            AND ideas.status = '0'
             AND ideas.category = category.id ORDER BY id DESC LIMIT $sp,1000");
 
         }
