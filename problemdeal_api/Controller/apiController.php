@@ -523,9 +523,9 @@ class ApiController {
         }
         
         if($data!=null){
-            $this->loadModel('Investor');
+            $this->loadModel('investor');
 
-            $details = $this->Investor->getall($data);
+            $details = $this->investor->getallbyuserid($data);
 
             if($details){
             
@@ -534,7 +534,7 @@ class ApiController {
 
             }else{
                 $output['code'] = '101';
-                $output['msg'] = "server error :-".$this->Investor->conn->error;
+                $output['msg'] = "server error :-".$this->investor->conn->error;
 
             }
 
