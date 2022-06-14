@@ -245,6 +245,43 @@ class Idea{
         }
         
     }
+
+    public function update($data)
+    {
+        $this->error = "no";
+        if(!$this->conn){
+            $this->error = 'failed to connect';
+            return false;
+        }
+
+        $id = $data['id'];
+        $current = mysqli_fetch_array(mysqli_query($this->conn,"SELECT * FROM ideas WHERE id='$id'"));
+        $updated = gmdate("Y-m-d H:i:s");
+        if(!$current){
+            $this->error = 'idea not found';
+            return false;
+        }
+
+        if(isset($data['name'])){$name = $data['name'];}else{$name = $current['name'];}
+        if(isset($data['category'])){$category = $data['category'];}else{$category = $current['category'];}
+        if(isset($data['icon'])){$icon = $data['icon'];}else{$icon = $current['icon'];}
+        if(isset($data['description'])){$description = $data['description'];}else{$description = $current['description'];}
+        if(isset($data['status'])){$status = $data['status'];}else{$status = $current['status'];}
+        if(isset($data['updated'])){$updated = $data['updated'];}
+        // if(isset($data['name'])){$name = $data['name'];}else{$name = $current['name'];}
+        // if(isset($data['name'])){$name = $data['name'];}else{$name = $current['name'];}
+
+        $qry = "UPDATE ideas SET name='$name', category='$category', icon='$icon', description='$description', status='$status', updated='$updated' WHERE id='$id' ;";
+
+        if($this->conn->query($qry)){
+            return true;
+        }else{
+            $this->error = $this->conn->error;
+            return false;
+        }
+
+
+    }
     
 
 }

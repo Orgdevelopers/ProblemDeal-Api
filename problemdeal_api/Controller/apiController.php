@@ -787,6 +787,48 @@ class ApiController {
 
     }
 
+    public function updateidea()
+    {
+        
+        $data = $this->getInputs();
+        if($data==null){
+            echo json_encode(array('code'=>'101','message'=>'incomplete params'));
+            die;
+        }
+        
+        $this->loadModel('Idea');
+    
+        if($this->Idea->update($data)){
+            echo json_encode(array('code'=>'200','message'=>'success'));
+        }else{
+            echo json_encode(array('code'=>'101','message'=>''.$this->Idea->error));
+        }
+
+        die;
+
+    }
+
+    public function updatebusiness()
+    {
+        
+        $data = $this->getInputs();
+        if($data==null){
+            echo json_encode(array('code'=>'101','message'=>'incomplete params'));
+            die;
+        }
+        
+        $this->loadModel('Business');
+    
+        if($this->Business->update($data)){
+            echo json_encode(array('code'=>'200','message'=>'success'));
+        }else{
+            echo json_encode(array('code'=>'101','message'=>''.$this->Business->error));
+        }
+
+        die;
+
+    }
+
     public function uploadinvestor()
     {
         
