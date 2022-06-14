@@ -791,6 +791,20 @@ class ApiController {
     {
         
         $data = $this->getInputs();
+
+        if($_FILES!=null && isset($_FILES['u_file'])){
+
+            $prefix=rand(1000,999999);
+            $originalImgName= $prefix.$_FILES['u_file']['name'];
+            $tempName= $_FILES['u_file']['tmp_name'];
+            $folder= UPLOADS_DIR;
+            
+            if(move_uploaded_file($tempName,$folder.$originalImgName)){
+                $data['icon'] = "uploads/images/".$originalImgName;
+            }
+
+        }
+
         if($data==null){
             echo json_encode(array('code'=>'101','message'=>'incomplete params'));
             die;
@@ -815,6 +829,19 @@ class ApiController {
         if($data==null){
             echo json_encode(array('code'=>'101','message'=>'incomplete params'));
             die;
+        }
+
+        if($_FILES!=null && isset($_FILES['u_file'])){
+
+            $prefix=rand(1000,999999);
+            $originalImgName= $prefix.$_FILES['u_file']['name'];
+            $tempName= $_FILES['u_file']['tmp_name'];
+            $folder= UPLOADS_DIR;
+            
+            if(move_uploaded_file($tempName,$folder.$originalImgName)){
+                $data['icon'] = "uploads/images/".$originalImgName;
+            }
+
         }
         
         $this->loadModel('Business');
