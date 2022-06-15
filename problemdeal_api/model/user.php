@@ -179,8 +179,6 @@ class User{
         }
     }
 
-
-
     
     public function deleteUser($id)
     {

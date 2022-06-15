@@ -991,7 +991,7 @@ class ApiController {
 
         }
 
-        $this->loadModel("User");
+        $this->loadModel('User');
         if($this->User->update($data)){
             echo json_encode(['code'=>'200','message'=>'success']);
 
@@ -1002,6 +1002,32 @@ class ApiController {
 
         die;
         
+    }
+
+    public function sendchatnotification()
+    {
+        $data = $this->getInputs();
+        if($data==null){
+            incomplete_data();
+        }
+
+        $this->loadModel('User');
+        $s['id'] = $data['sender_id'];
+        $r['id'] = $data['other_user_id'];
+        $sender = $this->User->getdetails($s);
+        $other_user = $this->User->getdetails($r);
+
+        if(count($other_user['token'])>5){
+            $msg['title'] = "You hava a new message from ".$sender['name'];
+            $msg['msg'] = $data['msg'];
+
+            $result =  sendPushNotification($other_user['token'],$msg);
+
+        }else{
+            $output['code'] = '200';
+            $output['msg'] = 'user token missing impossible to send message';
+        }
+
     }
 
     public function resendverificationemail() //200=success, 101=error , 201 = already verified , 111 faild to send email

@@ -9,6 +9,8 @@ $portt = '3307';
 $base_url = "https://problemdeal.tk/problemdeal_api/";
 $api_key = 'AAADFJ-J9D49F-NDN49H-NVOI49=';
 
+$firebase_api_key = "";
+
 $mail_name = 'Problem deal verification service';
 $mail_email = 'support@problemdeal.tk';
 $mail_reply_to = 'no-reply@problemdeal.tk';
@@ -21,6 +23,7 @@ define('DB_USERNAME',$db_user);
 define('DB_PASSWORD',$password);
 define('DB_PORT',$portt);
 define('BASE_URL',$base_url);
+define('FIREBASE_API_KEY',$firebase_api_key);
 
 define('MAIL_NAME',$mail_name);
 define('MAIL_EMAIL',$mail_email);

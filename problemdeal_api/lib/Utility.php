@@ -73,4 +73,31 @@ function send_email($data){
 
 }
 
+function sendPushNotification($token,$message){
+    $api_key = FIREBASE_API_KEY;
+
+    $url = "https://fcm.googleapis.com/fcm/send";
+    $headers = array (
+        'Authorization: key=' . $api_key,
+        'Content-Type: application/json'
+    );
+
+
+    $msg['to'] = $token;
+    $msg['notification']['title'] = $message['title'];
+    $msg['notification']['body'] = $message['msg'];
+
+    $ch = curl_init ();
+    curl_setopt ( $ch, CURLOPT_URL, $url );
+    curl_setopt ( $ch, CURLOPT_POST, true );
+    curl_setopt ( $ch, CURLOPT_HTTPHEADER, $headers );
+    curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
+    curl_setopt ( $ch, CURLOPT_POSTFIELDS, json_encode($msg) );
+
+    $result = curl_exec ( $ch );
+
+    return $result;
+
+}
+
 ?>
