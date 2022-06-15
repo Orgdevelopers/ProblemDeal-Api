@@ -138,9 +138,10 @@ class User{
         if(isset($data['verified'])){$verified = $data['verified'];}else{$verified = $current_user['verified'];}
         if(isset($data['role'])){$role = $data['role'];}else{$role = $current_user['role'];}
         if(isset($data['signin_type'])){$signin_type = $data['signin_type'];}else{$signin_type = $current_user['signin_type'];}
+        if(isset($data['token'])){$token=$data['token'];}else{$token=$current_user['token'];}
 
         $stmt = "UPDATE users SET name='$name', username='$username', email='$email', password='$password', pic='$pic', bio='$bio', 
-        verified='$verified', role='$role', signin_type='$signin_type' WHERE id=$id";
+        verified='$verified', role='$role', token='$token', signin_type='$signin_type' WHERE id=$id";
 
         if($this->conn->query($stmt)){
             return true;

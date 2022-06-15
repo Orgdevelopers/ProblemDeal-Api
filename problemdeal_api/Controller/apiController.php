@@ -987,7 +987,6 @@ class ApiController {
     {
         $data=$this->getInputs();
         if($data==null && !isset($data["id"])){
-
             incomplete_data();
 
         }
