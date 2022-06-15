@@ -11,8 +11,8 @@
 
 
     $msg['to'] = $token;
-    $msg['notification']['title'] = $message['title'];
-    $msg['notification']['body'] = $message['msg'];
+    $msg['notification']['title'] = "hi how are you";//$message['title'];
+    $msg['notification']['body'] = "this is a test message";//$message['msg'];
 
     $ch = curl_init ();
     curl_setopt ( $ch, CURLOPT_URL, $url );
