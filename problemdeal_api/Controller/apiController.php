@@ -1017,7 +1017,7 @@ class ApiController {
         $sender = $this->User->getdetails($s);
         $other_user = $this->User->getdetails($r);
 
-        if(count($other_user['token'])>5){
+        if($other_user['token']!=null){
             $msg['title'] = "You hava a new message from ".$sender['name'];
             $msg['msg'] = $data['msg'];
 
