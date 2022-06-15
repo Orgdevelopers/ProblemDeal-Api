@@ -708,6 +708,10 @@ class ApiController {
 
             $date = gmdate("Y-m-d H:i:s");
 
+            if(isset($data['description'])){
+                $data['description'] = str_replace("'","\'",$data['description']);
+            }
+
             $create_data['user_id'] = $data['id'];
             $create_data['name'] = $data['business_name'];
             $create_data['category'] = $data['category'];
@@ -758,6 +762,10 @@ class ApiController {
 
             $date = gmdate("Y-m-d H:i:s");
 
+            if(isset($data['description'])){
+                $data['description'] = str_replace("'","\'",$data['description']);
+            }
+
             $create_data['user_id'] = $data['id'];
             $create_data['name'] = $data['idea_name'];
             $create_data['category'] = $data['category'];
@@ -803,6 +811,10 @@ class ApiController {
                 $data['icon'] = "uploads/images/".$originalImgName;
             }
 
+        }
+
+        if(isset($data['description'])){
+            $data['description'] = str_replace("'","\'",$data['description']);
         }
 
         if($data==null){
@@ -938,6 +950,10 @@ class ApiController {
 
             $date = gmdate("Y-m-d H:i:s");
 
+            if(isset($data['description'])){
+                $data['description'] = str_replace("'","\'",$data['description']);
+            }
+
             $create_data['user_id'] = $data['id'];
             $create_data['name'] = $data['name'];
             $create_data['category'] = $data['category'];
@@ -965,6 +981,28 @@ class ApiController {
 
         die;
 
+    }
+
+    public function update_token()
+    {
+        $data=$this->getInputs();
+        if($data==null && !isset($data["id"])){
+
+            incomplete_data();
+
+        }
+
+        $this->loadModel("User");
+        if($this->User->update($data)){
+            echo json_encode(['code'=>'200','message'=>'success']);
+
+        }else{
+        	echo json_encode(['code'=>'101','message'=>'error']);
+
+        }
+
+        die;
+        
     }
 
     public function resendverificationemail() //200=success, 101=error , 201 = already verified , 111 faild to send email
