@@ -1021,10 +1021,19 @@ class ApiController {
             $msg['title'] = "You hava a new message from ".$sender['name'];
             $msg['msg'] = $data['msg'];
 
-            $result =  sendPushNotification($other_user['token'],$msg);
+            $res = sendPushNotification($other_user['token'],$msg);
+            $result = json_decode($res,true);
+
+            if(count($result)>0 && $result['success']==1){
+                $output['code'] = '200';
+                $output['msg'] = 'success';
+            }else{
+                $output['code'] = '101';
+                $output['msg'] = 'fcm error '.$res ;
+            }
 
         }else{
-            $output['code'] = '200';
+            $output['code'] = '101';
             $output['msg'] = 'user token missing impossible to send message';
         }
 
