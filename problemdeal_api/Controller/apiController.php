@@ -1024,9 +1024,10 @@ class ApiController {
             $res = sendPushNotification($other_user['token'],$msg);
             $result = json_decode($res,true);
 
-            if(count($result)>0 && $result['success']==1){
+            if($result!=null && $result['success']==1){
                 $output['code'] = '200';
                 $output['msg'] = 'success';
+
             }else{
                 $output['code'] = '101';
                 $output['msg'] = 'fcm error '.$res ;
@@ -1036,6 +1037,9 @@ class ApiController {
             $output['code'] = '101';
             $output['msg'] = 'user token missing impossible to send message';
         }
+
+        echo json_encode($output);
+        die;
 
     }
 
