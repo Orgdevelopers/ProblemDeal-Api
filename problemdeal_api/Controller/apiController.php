@@ -867,6 +867,8 @@ class ApiController {
                 $output = ['code'=>'101','msg'>="failed"];
             }
         
+            echo json_encode($output);
+
         }else{
             incomplete_data();
         }
@@ -883,6 +885,27 @@ class ApiController {
             }else{
                 $output = ['code'=>'101','msg'>="failed"];
             }
+
+            echo json_encode($output);
+        
+        }else{
+            incomplete_data();
+        }
+
+    }
+
+    public function deleteinvestor()
+    {
+        $data = $this->getInputs();
+        if($data!=null && isset($data['id'])){
+            $this->loadModel('Business');
+            if($this->Business->delete($data['id'])){
+                $output = ['code'=>'200','msg'>="success"];
+            }else{
+                $output = ['code'=>'101','msg'>="failed"];
+            }
+
+            echo json_encode($output);
         
         }else{
             incomplete_data();
