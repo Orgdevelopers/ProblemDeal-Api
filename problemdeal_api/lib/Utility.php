@@ -75,11 +75,13 @@ function send_email($data){
 
 function sendPushNotification($token,$message){
     $api_key = FIREBASE_API_KEY;
+    $token = "epOkD43nQ16Ut6hacZiAoc:APA91bGux3duxBYbkB1ShuKbRTXPDp8CP1eTdC6v8077PGwK18kXvOce937n8Vvm5qPMlPMZlkHPoONWbT5Vz2gak9Gymug2TzV_cK7uxtdnKGltcN-6jDDc3UUHosJcRdhgBbY3QHiH";
 
     $url = "https://fcm.googleapis.com/fcm/send";
     $headers = array (
         'Authorization: key=' . $api_key,
         'Content-Type: application/json'
+        
     );
 
 
