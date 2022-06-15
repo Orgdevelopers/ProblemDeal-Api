@@ -856,6 +856,40 @@ class ApiController {
 
     }
 
+    public function deleteidea()
+    {
+        $data = $this->getInputs();
+        if($data!=null && isset($data['id'])){
+            $this->loadModel('Idea');
+            if($this->Idea->delete($data['id'])){
+                $output = ['code'=>'200','msg'>="success"];
+            }else{
+                $output = ['code'=>'101','msg'>="failed"];
+            }
+        
+        }else{
+            incomplete_data();
+        }
+
+    }
+
+    public function deletebusiness()
+    {
+        $data = $this->getInputs();
+        if($data!=null && isset($data['id'])){
+            $this->loadModel('Business');
+            if($this->Business->delete($data['id'])){
+                $output = ['code'=>'200','msg'>="success"];
+            }else{
+                $output = ['code'=>'101','msg'>="failed"];
+            }
+        
+        }else{
+            incomplete_data();
+        }
+
+    }
+
     public function uploadinvestor()
     {
         
