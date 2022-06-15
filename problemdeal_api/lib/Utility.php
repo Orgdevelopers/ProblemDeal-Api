@@ -87,7 +87,7 @@ function sendPushNotification($token,$message){
 
     $msg['to'] = $token;
     $msg['notification']['title'] = $message['title'];
-    $msg['notification']['body'] = ": ".$message['msg'];
+    $msg['notification']['body'] = $message['msg'];
 
     $ch = curl_init ();
     curl_setopt ( $ch, CURLOPT_URL, $url );
