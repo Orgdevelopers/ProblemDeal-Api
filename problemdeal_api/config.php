@@ -9,7 +9,7 @@ $portt = '3307';
 $base_url = "https://problemdeal.tk/problemdeal_api/";
 $api_key = 'AAADFJ-J9D49F-NDN49H-NVOI49=';
 
-$firebase_api_key = "";
+$firebase_api_key = "AAAA8BxRyvc:APA91bHNO8IyZtpSnXSlA2E3IXHd4DvzSlXDcFhXdSpSRJzlaC_c8g4z6wQi9Fo1uyFOlOVj_AeO-wOa1_uMAaQaoUpM2qWq0s7LS8nXJwybyqor2A__IbWNPMDw4vYbz9JC1H6FjnyW";
 
 $mail_name = 'Problem deal verification service';
 $mail_email = 'support@problemdeal.tk';
