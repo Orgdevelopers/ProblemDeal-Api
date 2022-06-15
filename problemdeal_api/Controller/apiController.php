@@ -843,6 +843,10 @@ class ApiController {
             }
 
         }
+
+        if(isset($data['description'])){
+            $data['description'] = str_replace("'","\'",$data['description']);
+        }
         
         $this->loadModel('Business');
     
