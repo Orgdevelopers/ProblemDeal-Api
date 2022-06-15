@@ -177,6 +177,22 @@ class investor{
 
     }
 
+    public function delete($id)
+    {
+        if(!$this->conn){
+            return false;
+        }
+
+        $qry = "DELETE FROM investor WHERE id='$id'";
+
+        if($this->conn->query($qry)){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
 }
 
 ?>

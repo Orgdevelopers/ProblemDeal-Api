@@ -909,13 +909,14 @@ class ApiController {
         }
 
     }
+    
 
     public function deleteinvestor()
     {
         $data = $this->getInputs();
         if($data!=null && isset($data['id'])){
-            $this->loadModel('Business');
-            if($this->Business->delete($data['id'])){
+            $this->loadModel('investor');
+            if($this->investor->delete($data['id'])){
                 $output = ['code'=>'200','msg'>="success"];
             }else{
                 $output = ['code'=>'101','msg'>="failed"];
