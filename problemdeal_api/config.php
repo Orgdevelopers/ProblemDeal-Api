@@ -1,9 +1,9 @@
 <?php
 
 $hostname = "localhost";
-$database   = "prob_lemdeal";
-$db_user = 'prob_lemdeal';
-$password = 'prob_lemdeal';
+$database   = "shur_db";
+$db_user = 'shur_db';
+$password = 'shur_db';
 $portt = '3307';
 
 $base_url = "https://problemdeal.tk/problemdeal_api/";
