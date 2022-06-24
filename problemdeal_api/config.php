@@ -4,7 +4,7 @@ $hostname = "localhost";
 $database   = "shur_db";
 $db_user = 'shur_db';
 $password = 'shur_db';
-$portt = '3307';
+$portt = '3306';
 
 $base_url = "https://problemdeal.tk/problemdeal_api/";
 $api_key = 'AAADFJ-J9D49F-NDN49H-NVOI49=';
