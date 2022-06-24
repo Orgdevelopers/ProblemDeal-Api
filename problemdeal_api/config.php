@@ -6,16 +6,16 @@ $db_user = 'shur_db';
 $password = 'shur_db';
 $portt = '3306';
 
-$base_url = "https://problemdeal.tk/problemdeal_api/";
+$base_url = "https://shuruaatnow.com/problemdeal_api/";
 $api_key = 'AAADFJ-J9D49F-NDN49H-NVOI49=';
 
 $firebase_api_key = "AAAA8BxRyvc:APA91bHNO8IyZtpSnXSlA2E3IXHd4DvzSlXDcFhXdSpSRJzlaC_c8g4z6wQi9Fo1uyFOlOVj_AeO-wOa1_uMAaQaoUpM2qWq0s7LS8nXJwybyqor2A__IbWNPMDw4vYbz9JC1H6FjnyW";
 
-$mail_name = 'Problem deal verification service';
-$mail_email = 'support@problemdeal.tk';
-$mail_reply_to = 'no-reply@problemdeal.tk';
+$mail_name = 'Shuruaat Now verification service';
+$mail_email = 'support@shuruaatnow.com';
+$mail_reply_to = 'no-reply@shuruaatnow.com';
 
-define('APP_NAME','Problem deal');
+define('APP_NAME','Shuruaat Now');
 define('API_KEY',$api_key);
 define('DB_HOST',$hostname);
 define('DB_DATABASE',$database);
