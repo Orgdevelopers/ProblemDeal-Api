@@ -9,7 +9,7 @@ class Database{
     private $port = DB_PORT;
     
     public function getConnection(){	
-		die;	
+		//die;	
 		$conn = new mysqli($this->host, $this->user, $this->password, $this->database,$this->port);
 		$conn->set_charset("utf8mb4");
 		if($conn->connect_error){

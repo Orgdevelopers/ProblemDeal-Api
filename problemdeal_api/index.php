@@ -27,7 +27,7 @@ $request_uri=str_replace($php_self,"",$request_uri);
 //$request_uri=str_replace("/","",$request_uri);
 
 //check api key
-verfiy_api_key();
+//verfiy_api_key();
 
 //call method
 $url = explode('/',$request_uri);
